@@ -2,7 +2,7 @@
 
 A Java Spring Boot application that generates comprehensive access reports showing which users have access to which repositories within a GitHub organization.
 
-## 📋 Problem This Solves
+## Problem This Solves
 
 Organizations need visibility into team member access across repositories. This service provides:
 - A complete mapping of users to repositories they can access
@@ -10,16 +10,16 @@ Organizations need visibility into team member access across repositories. This 
 - Repository language information
 - Efficient handling of large organizations (100+ repos, 1000+ users)
 
-## ✨ Features
+## Features
 
-✅ OAuth/Token-based GitHub authentication  
-✅ Parallel processing for efficiency (handles 100+ repos in 1-2 minutes)  
-✅ RESTful API endpoint returning structured JSON  
-✅ Access level classification  
-✅ Error handling and rate limit awareness  
-✅ No database required - stateless design  
+1) OAuth/Token-based GitHub authentication  
+2) Parallel processing for efficiency (handles 100+ repos in 1-2 minutes)  
+3) RESTful API endpoint returning structured JSON  
+4) Access level classification  
+5) Error handling and rate limit awareness  
+6) No database required - stateless design  
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 User Request
@@ -34,7 +34,7 @@ GitHub Access Service
 JSON Response
 ```
 
-## 📦 What You Get
+## What You Get
 
 ```
 access-report/
@@ -50,7 +50,7 @@ access-report/
 └── README.md                             (This file)
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Java 17+ ([Download](https://www.oracle.com/java/technologies/downloads/))
@@ -88,8 +88,6 @@ mvn clean install
 # Run the application
 mvn spring-boot:run
 
-# Or run the JAR directly
-java -jar target/access-report-1.0.0.jar
 ```
 
 You should see:
@@ -98,7 +96,7 @@ Started Application in X.XXX seconds
 Tomcat started on port(s): 8080
 ```
 
-## 📡 API Usage
+## API Usage
 
 ### Endpoint
 ```
@@ -109,19 +107,19 @@ GET /api/access-report
 - `org` - GitHub organization name
 
 ### Optional Parameters
-- `token` - GitHub access token (if not set as environment variable)
+- `token` - Create a GitHub access token (if not set as environment variable)
 
 ### Example Requests
 
 **With environment variable:**
 ```bash
 export GITHUB_TOKEN="your_token_here"
-curl http://localhost:8080/api/access-report?org=torvalds
+curl http://localhost:8080/api/access-report?org=your_org
 ```
 
 **With URL parameter:**
 ```bash
-curl http://localhost:8080/api/access-report?org=torvalds&token=your_token_here
+curl http://localhost:8080/api/access-report?org=your_org&token=your_token_here
 ```
 
 **Check health:**
@@ -134,7 +132,7 @@ curl http://localhost:8080/api/health
 ```json
 {
   "status": "success",
-  "organization": "torvalds",
+  "organization": "your_org",
   "totalRepositories": 152,
   "totalUsers": 1247,
   "executionTimeMs": 45000,
@@ -162,13 +160,13 @@ curl http://localhost:8080/api/health
 }
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
 ```bash
 # Set GitHub token
-export GITHUB_TOKEN="github_pat_xxxxxxxxxxxxx"
+export GITHUB_TOKEN="YOUR_GITHUB_TOKEN_COMES_HERE"
 
 # Optional: Change port
 export SERVER_PORT=9090
@@ -185,13 +183,13 @@ logging.level.root=INFO
 logging.level.com.github=DEBUG
 ```
 
-## 📊 Performance & Scalability
+## Performance & Scalability
 
 ### Current Implementation Handles:
-- ✅ 100+ repositories
-- ✅ 1000+ users
-- ✅ Parallel processing for efficiency
-- ✅ GitHub API rate limits (5,000 calls/hour with token)
+- 100+ repositories
+- 1000+ users
+- Parallel processing for efficiency
+- GitHub API rate limits (5,000 calls/hour with token)
 
 ### Optimization Techniques Used:
 1. **Pagination**: Fetches 100 results per page
@@ -204,7 +202,7 @@ logging.level.com.github=DEBUG
 - 150 repositories: 45-60 seconds
 - 300 repositories: 2-3 minutes
 
-## 🛡️ Security Considerations
+## Security Considerations
 
 ### What You Should Know:
 
@@ -226,14 +224,14 @@ logging.level.com.github=DEBUG
 ### Implementation Example
 
 ```java
-// ❌ WRONG - Token in code
+// WRONG - Token in code
 String token = "ghp_xxxxxxxxxxxx";
 
-// ✅ RIGHT - Token from environment
+// RIGHT - Token from environment
 String token = System.getenv("GITHUB_TOKEN");
 ```
 
-## 🔍 How It Works (Technical Deep Dive)
+## How It Works (Technical Deep Dive)
 
 ### Step 1: Authenticate with GitHub
 ```java
@@ -261,7 +259,7 @@ Map: alice → [repo1, repo2, repo3]
      ...
 ```
 
-## 📈 Example Use Cases
+##  Example Use Cases
 
 ### 1. Audit Access for Compliance
 ```bash
@@ -288,7 +286,7 @@ jq '.userAccess[] | select(.accessLevel=="HIGH")' access-report.json
 # Display access patterns by team, department, etc.
 ```
 
-## ⚠️ Error Handling
+## Error Handling
 
 ### Common Errors & Solutions
 
@@ -299,7 +297,7 @@ jq '.userAccess[] | select(.accessLevel=="HIGH")' access-report.json
 | `401 Unauthorized` | Invalid/expired token | Generate new token, check permissions |
 | `Timeout` | Large org, slow network | Increase timeout, try again |
 
-## 🧪 Testing
+## Testing
 
 ### Health Check
 ```bash
@@ -316,7 +314,7 @@ curl "http://localhost:8080/api/access-report?org=rails"
 # Should complete in ~30 seconds for ~200 repos
 ```
 
-## 📝 Code File Descriptions
+## Code File Descriptions
 
 ### Application.java
 - Spring Boot entry point
@@ -345,7 +343,7 @@ curl "http://localhost:8080/api/access-report?org=rails"
 - Build plugin configuration
 - ~80 lines
 
-## 🚀 Deployment Options
+## Deployment Options
 
 ### Local Development
 ```bash
@@ -366,7 +364,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 - **Google Cloud Run**: Push Docker image
 - **Azure App Service**: Deploy from GitHub
 
-## 📚 Dependencies Explained
+## Dependencies Explained
 
 | Dependency | Purpose | Version |
 |------------|---------|---------|
@@ -375,7 +373,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 | `gson` | JSON parsing and generation | 2.10.1 |
 | `spring-boot-starter-logging` | Application logging | 3.2.0 |
 
-## 🤝 Design Decisions
+## Design Decisions
 
 ### Why These Technologies?
 
@@ -397,18 +395,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 - Pagination prevents memory issues with large result sets
 - Early termination on pagination boundaries
 
-## 🔄 Future Enhancements
-
-Possible improvements (not required for assignment):
-
-1. **Caching** - Cache results for 1 hour to reduce API calls
-2. **Webhook Integration** - Trigger updates on repository changes
-3. **Team Visualization** - Show team-to-repository mappings
-4. **Permission Details** - Include admin/write/read levels
-5. **Historical Tracking** - Store access changes over time
-6. **CSV Export** - Generate downloadable reports
-
-## 📞 Troubleshooting
+## Troubleshooting
 
 ### Port Already in Use
 ```bash
@@ -433,26 +420,22 @@ mvn clean install -DskipTests
 java -version  # Should be 17+
 ```
 
-## 📜 License
+## Assignment Checklist
 
-MIT License - Use freely for assignments and projects
+- Authenticate with GitHub using secure token
+- Retrieve repositories for organization
+- Determine user access per repository
+- Generate aggregated user-to-repos mapping
+- Expose REST API endpoint returning JSON
+- Handle 100+ repositories efficiently
+- Handle 1000+ users efficiently
+- Clean code organization (service layer pattern)
+- Error handling with meaningful messages
+- Efficient API usage (pagination, parallelization)
+- README with setup, usage, and assumptions
+- Public GitHub repository with complete source
 
-## 🎯 Assignment Checklist
-
-- ✅ Authenticate with GitHub using secure token
-- ✅ Retrieve repositories for organization
-- ✅ Determine user access per repository
-- ✅ Generate aggregated user-to-repos mapping
-- ✅ Expose REST API endpoint returning JSON
-- ✅ Handle 100+ repositories efficiently
-- ✅ Handle 1000+ users efficiently
-- ✅ Clean code organization (service layer pattern)
-- ✅ Error handling with meaningful messages
-- ✅ Efficient API usage (pagination, parallelization)
-- ✅ README with setup, usage, and assumptions
-- ✅ Public GitHub repository with complete source
-
-## 📖 How to Customize
+## How to Customize
 
 ### Change Response Format
 Edit `buildReport()` method in `GitHubAccessService.java`
@@ -477,16 +460,11 @@ private String calculateAccessLevel(int repoCount, int totalRepos) {
 
 ## Ready to Deploy?
 
-1. ✅ Java 17+ installed
-2. ✅ Maven installed
-3. ✅ GitHub token created
-4. ✅ Project files created
-5. ✅ Run: `mvn spring-boot:run`
-6. ✅ Test: `curl http://localhost:8080/api/health`
-7. ✅ Generate report: `curl http://localhost:8080/api/access-report?org=YOUR_ORG`
+1. Java 17+ installed
+2. Maven installed
+3. GitHub token created
+4. Project files created
+5. Run: `mvn spring-boot:run`
+6. Test: `curl http://localhost:8080/api/health`
+7. Generate report: `curl http://localhost:8080/api/access-report?org=YOUR_ORG`
 
-**You're all set! 🚀**
-
----
-
-*Built for GitHub Internship Assignment - Java Developer Track*
