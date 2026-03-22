@@ -1,0 +1,74 @@
+# Maven
+target/
+*.jar
+*.war
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.classpath
+.project
+.settings/
+.DS_Store
+Thumbs.db
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+GITHUB_TOKEN
+
+# Java
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+*.jar.original
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# Build
+build/
+dist/
+*.log
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Database (if you add it later)
+*.db
+*.sqlite
+
+# Node (if frontend added later)
+node_modules/
+npm-debug.log
+
+# Python (if scripts added later)
+__pycache__/
+*.pyc
+
+# Credentials files
+*.pem
+*.key
+*.p8
+credentials.json
+secrets.json

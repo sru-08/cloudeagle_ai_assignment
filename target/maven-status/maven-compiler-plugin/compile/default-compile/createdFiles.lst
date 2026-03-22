@@ -1,0 +1,5 @@
+com\github\AccessReportController.class
+com\github\CollaboratorInfo.class
+com\github\GitHubAccessService.class
+com\github\RepositoryInfo.class
+com\github\Application.class
